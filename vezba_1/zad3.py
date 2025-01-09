@@ -2,13 +2,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import stats
+from sklearn.linear_model import Ridge
 
 # Dodati novi podatak: kvadratura stana 60 I cena stana 20 000.
 # Istrenirati model na tim podacima. Iscrtati regresionu liniju
 # za tako dobijen model, i prethodno istreniran model.
 
-# Iskoristiti Ridge regressiju sa alpha faktorom = 1000. Iscrtati
-# sva tri modela
+# Iskoristiti Ridge regressiju sa alpha faktorom = 1000. Iscrtati sva tri modela
 
 df = pd.read_csv("house_pricing.csv")
 
@@ -32,7 +32,12 @@ def get_price_2(x):
 
 data = list(map(get_price, square_meters))
 data_2 = list(map(get_price_2, square_meters_2))
+data_ridge = Ridge(alpha=1000)
+data_ridge = data_ridge.fit(square_meters_2.reshape(-1, 1), price_2)
 
-plt.plot(square_meters, data)
-plt.plot(square_meters_2, data_2)
+plt.scatter(square_meters_2,price_2)
+plt.plot(square_meters, data, label="Data")
+plt.plot(square_meters_2, data_2, label="Data 2")
+plt.plot((10, 70), (data_ridge.predict([[10]]), data_ridge.predict([[70]])), label="Ridge")
+plt.legend()
 plt.show()
