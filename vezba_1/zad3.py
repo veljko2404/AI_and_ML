@@ -15,7 +15,7 @@ df = pd.read_csv("house_pricing.csv")
 square_meters = np.asarray(df["sqm"])
 price = np.asarray(df["price"])
 square_meters_2 = np.append(square_meters, 60)
-price_2 = np.append(price, 20000)
+price_2 = np.append(price, 50000)
 
 slope, intercept, r, p, std_error = stats.linregress(square_meters, price)
 
