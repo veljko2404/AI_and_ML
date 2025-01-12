@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 
-
 data = pd.read_csv("data.csv")
 
 x = np.asarray(data["x"])
@@ -25,13 +24,13 @@ x1_coef, x2_coef = model.coef_
 intercept = model.intercept_
 y_grid = x1_coef * x1_grid + x2_coef * x2_grid
 
-fig=plt.figure(figsize=(20,30))
-ax=fig.add_subplot(211,projection="3d")
-ax.scatter(x_transformed[:,0],x_transformed[:,1],y,alpha=1,color="red",s=2000)
-ax.view_init(elev=30,azim=85)
+fig = plt.figure(figsize=(20, 30))
+ax = fig.add_subplot(211, projection="3d")
+ax.scatter(x_transformed[:, 0], x_transformed[:, 1], y, alpha=1, color="red", s=2000)
+ax.view_init(elev=30, azim=85)
 
-ax2=fig.add_subplot(212)
-ax.scatter(x,y,color="red")
-ax2.plot(x,model.predict(x_transformed))
+ax2 = fig.add_subplot(212)
+ax.scatter(x, y, color="red")
+ax2.plot(x, model.predict(x_transformed))
 
 plt.show()
